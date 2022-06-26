@@ -1,6 +1,8 @@
 - **Start Date:** 2022-06-24
 - **RFC PR:**
 
+# == WORK IN PRGRESS ==
+
 # Use WebRTC as a communication layer option for @xstate/inspect and a unified cross-platform medium for actor messaging & service-discovery
 
 ## Summary
@@ -31,8 +33,9 @@ Protocol Basics:
 Source: [https://swimlanes.io/u/verzeXJwO](https://swimlanes.io/u/verzeXJwO)
 ![https://swimlanes.io/u/verzeXJwO](./webRTC-protocol.png)
 
-8. Messaging commences via a P2P secure socket between the `Host` and `Client`
+Communication capabilities
 
+- Proxy via TURN server (Can be configured in cloud & private networks)
 - Text messages (TCP)
 - Blob file transfers (TCP)
 - Real-time Video & Audio communication channel (UDP)
@@ -93,6 +96,12 @@ This section is split into two specific uses of the WebRTC specification in XSta
 
 - Inspecting XState Actors with WebRTC
   - Access instances without needing websockets servers
+
+Authentication between Inspectors and Actors is aided with an Auth Server and common public key cryptography - this ensures that even instances without SSL certificates, it is possible to authenticate and ensure secure communications between inspectors and actors
+
+Source: [https://swimlanes.io/u/KUxL4QD3z](https://swimlanes.io/u/KUxL4QD3z)
+![https://swimlanes.io/u/KUxL4QD3z](./authServer.png)
+
 - Orchestrating XState Actors with WebRTC
   - Actor-Actor Messaging
   - Service discovery
