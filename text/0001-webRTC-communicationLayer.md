@@ -28,26 +28,8 @@ This works sufficiently for front-end web applications (postMesasage interproces
 webRTC is a widely used protocol for peer-to-peer communications on the web and has good support across Desktop browsers.
 Protocol Basics:
 
-1. All participants agreen on a common text "channel name" and a ICE Server (eg. `stun:stun.l.google.com:19302`)
-
-2. `Host` requests a new `Data Channel` from the `ICE Server`
-
-3. `Host` receives an ICE Candidate as a new `Data Channel`
-
-- `ICE server`: Notifies `Host` that a p2p messaging channel has been opened
-- `ICE server`: Creates new `Data Channel` and sends `Offer` information to `Host`
-- Signalling layer: `Offer` information should be sent to the `Client` via a separate medium
-
-4. `Client` accepts the offer and generates an answer
-
-- `ICE server`: `Client` sends the offer information to the `ICE server` which returns a `Data Channel` and `Offer Answer`
-- Signalling layer: `Client` should send `Offer Answer` information to the `Host` via a separate medium
-
-5. `Host` sends the `Offer Answer` to the `ICE Server`
-
-6. `ICE server` Notifies `Client` that the `Data Channel` has been opened
-
-7. `ICE server` Notifies `Host` that the `Data Channel` has been opened
+Source: [https://swimlanes.io/u/verzeXJwO](https://swimlanes.io/u/verzeXJwO)
+![https://swimlanes.io/u/verzeXJwO](./webRTC-protocol.png)
 
 8. Messaging commences via a P2P secure socket between the `Host` and `Client`
 
