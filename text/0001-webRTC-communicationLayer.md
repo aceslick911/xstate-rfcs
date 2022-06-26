@@ -21,11 +21,39 @@ I believe by utilizing the `enhanced network connectivity` capabilities of WebRT
 
 ### Technical Background
 
-`@xstate/inspect` currently supports `window.postMessage()` or Websockets `options: { server: new WS("localhost:1234")}` as the communication layer between a running machine actors with devtools enabled.
+`@xstate/inspect` currently supports `window.postMessage()` or Websockets `options: { server: new WS("localhost:1234")}` as the communication layer between a running actors with devtools enabled and the Viz.
 
-This works sufficiently for web front-end applications (postMesasage interprocess communications is fast and efficient) but can be difficult and not consistently secure or possible (websockets must open a port on localhost) to implement for nodeJS services (using websockets in ).
+This works sufficiently for front-end web applications (postMesasage interprocess communications is fast and efficient) but can be difficult and not consistently secure or possible (websockets must open a port on localhost) to implement for nodeJS services (using websockets) or non javascript based platforms.
 
 webRTC is a widely used protocol for peer-to-peer communications on the web and has good support across Desktop browsers.
+Protocol Basics:
+
+1. All participants agreen on a common text "channel name" and a ICE Server (eg. `stun:stun.l.google.com:19302`)
+
+2. `Host` requests a new `Data Channel` from the `ICE Server`
+
+3. `Host` receives an ICE Candidate as a new `Data Channel`
+
+- `ICE server`: Notifies `Host` that a p2p messaging channel has been opened
+- `ICE server`: Creates new `Data Channel` and sends `Offer` information to `Host`
+- Signalling layer: `Offer` information should be sent to the `Client` via a separate medium
+
+4. `Client` accepts the offer and generates an answer
+
+- `ICE server`: `Client` sends the offer information to the `ICE server` which returns a `Data Channel` and `Offer Answer`
+- Signalling layer: `Client` should send `Offer Answer` information to the `Host` via a separate medium
+
+5. `Host` sends the `Offer Answer` to the `ICE Server`
+
+6. `ICE server` Notifies `Client` that the `Data Channel` has been opened
+
+7. `ICE server` Notifies `Host` that the `Data Channel` has been opened
+
+8. Messaging commences via a P2P secure socket between the `Host` and `Client`
+
+- Text messages (TCP)
+- Blob file transfers (TCP)
+- Real-time Video & Audio communication channel (UDP)
 
 ## Browsers
 
@@ -71,7 +99,7 @@ Formalizing a supported and consistent protocol for utilizing WebRTC for communi
 
 # Distributed Systems
 
-# Language-agnostic RPCs & Cross-platform Orchestration
+# Language-agnostic Actor P2P messaging & Cross-platform Orchestration
 
 As XState was originally developed in Javascript (browser), it is a well-supported tool capable of writing, maintaining and managing machines but primarily for the browser only.
 
